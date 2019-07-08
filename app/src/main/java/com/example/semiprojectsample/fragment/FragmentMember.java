@@ -1,29 +1,21 @@
 package com.example.semiprojectsample.fragment;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.semiprojectsample.R;
-import com.example.semiprojectsample.activity.LoginActivity;
-import com.example.semiprojectsample.activity.MainAvtivity;
 import com.example.semiprojectsample.bean.MemberBean;
 import com.example.semiprojectsample.db.FileDB;
-
-import java.io.File;
 
 import static com.example.semiprojectsample.activity.JoinActivity.getResizedBitmap;
 

@@ -11,11 +11,4 @@ public class MemberBean {
     public String memDate;
     public List<MemoBean> memoList;
 
-    public String getMemid() {
-        return memid;
-    }
-
-    public String getMempass() {
-        return mempass;
-    }
 }

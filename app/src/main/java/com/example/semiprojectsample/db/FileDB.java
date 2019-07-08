@@ -5,10 +5,13 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 
 import com.example.semiprojectsample.bean.MemberBean;
+import com.example.semiprojectsample.bean.MemoBean;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Member;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FileDB {
@@ -38,11 +41,52 @@ public class FileDB {
         //commit 를 사용해야 저장됨
     }
 
+    //기존 멤버 교체
+    public static void setMember (Context context,MemberBean memberBean){
+        //전체 멤버 리스트
+        List<MemberBean> memberList = getMemberList(context);
+        if(memberList.size() == 0) return;
+
+        for(int i = 0;i<memberList.size();i++){ //for each 는 리스트 받아서 그냥 값만 가져오는
+            MemberBean bean = memberList.get(i);
+            if(TextUtils.equals(bean.memid,memberBean.memid)){
+                //같은 멤버 ID 를 찾았다.
+                memberList.set(i,memberBean);
+                break;
+            }
+        }
+        //새롭게 update 된 리스트를 저장한다.
+        String jsonStr = mGson.toJson(memberList);
+        //멤버 리스트를 저장한다.
+        SharedPreferences.Editor editor = getsp(context).edit();
+        editor.putString("memberList",jsonStr);
+        editor.commit();
+
+    }
+
+    public static void addMemo(Context context, String memid, MemoBean memoBean){
+        MemberBean findMember = getFindMember(context,memid);
+        if(findMember == null)return;
+
+        List<MemoBean> memoList = findMember.memoList;
+        if(memoList == null){
+            memoList = new ArrayList<>();
+        }
+
+        //고유 id 생성
+        memoBean.memoId = System.currentTimeMillis();
+        memoList.add(memoBean);
+        findMember.memoList = memoList;
+
+        //저장
+        setMember(context,findMember);
+    }
+
+
     public static List<MemberBean> getMemberList (Context context){
         String listStr = getsp(context).getString("memberList",null);
 
         //저장된 리스트가 없을 경우 새로운 리스트를 반환
-
         if(listStr == null){
             return new ArrayList<MemberBean>();
         }
@@ -86,6 +130,25 @@ public class FileDB {
         MemberBean memberBean = mGson.fromJson(str,MemberBean.class);
         return memberBean;
 
+    }
+
+    //기존 메모 교체
+    public static void setMemo (Context context , String memId , MemoBean memoBean){
+
+    }
+
+    public static void delMemo (Context context, String memId, int memoid){
+
+    }
+
+    public static List<MemoBean> getMemoList(Context context, String memid){
+        MemberBean findMem = getFindMember(context, memid);
+        if(findMem == null)return null;
+        if(findMem.memoList == null){
+            return new ArrayList<>();
+        }else{
+            return findMem.memoList;
+        }
     }
 
 }

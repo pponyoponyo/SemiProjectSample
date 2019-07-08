@@ -1,7 +1,6 @@
 package com.example.semiprojectsample.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -13,9 +12,15 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.semiprojectsample.R;
+import com.example.semiprojectsample.bean.MemberBean;
+import com.example.semiprojectsample.bean.MemoBean;
+import com.example.semiprojectsample.db.FileDB;
 import com.example.semiprojectsample.fragment.FragmentCamera;
 import com.example.semiprojectsample.fragment.FragmentMemoWrite;
 import com.google.android.material.tabs.TabLayout;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class NewMemoActivity extends AppCompatActivity {
 
@@ -47,7 +52,7 @@ public class NewMemoActivity extends AppCompatActivity {
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                mViewPager.setCurrentItem(tab.getPosition());
+               mViewPager.setCurrentItem(tab.getPosition());
             }
 
             @Override
@@ -68,6 +73,7 @@ public class NewMemoActivity extends AppCompatActivity {
                 case R.id.btnCancel:
                     finish();
                     break;
+
                 case R.id.btnSave:
                     saveProc();
                     break;
@@ -107,14 +113,35 @@ public class NewMemoActivity extends AppCompatActivity {
 
         //2. 두번째 fragment 의 mPhotopath 값을 가져온다.
         FragmentCamera f1 = (FragmentCamera)  mViewPagerAdapter.instantiateItem(mViewPager,1);
+        String memoStr = "";
 
         EditText edtWriteMemo = f0.getView().findViewById(R.id.edtwriteMemo);
-        String memoStr = edtWriteMemo.getText().toString();
+        memoStr = edtWriteMemo.getText().toString();
         String photoPath = f1.mPhotoPath;
 
-        Log.e("SEM1","memoStr : "+memoStr+" photoPath" + photoPath);
-        Toast.makeText(this,"memoStr : "+memoStr+" photoPath" + photoPath,Toast.LENGTH_SHORT ).show();
+        MemoBean memoBean = new MemoBean();
 
+        if(memoStr.equals("")){
+            Toast.makeText(this,"메모를 작성해주세요.",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(photoPath == null){
+            Toast.makeText(this,"사진을 촬영해주세요.",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        memoBean.memo = memoStr;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        memoBean.memoDate = sdf.format(new Date());
+        memoBean.memoPicPath = photoPath;
+
+        MemberBean loginMember = FileDB.getLoginMember(this);
+
+        FileDB.addMemo(this, loginMember.memid,memoBean);
+
+        Toast.makeText(this,"메모가 추가되었습니다.",Toast.LENGTH_SHORT).show();
+
+        finish();
 
     }
 

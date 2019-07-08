@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -64,6 +65,7 @@ public class FragmentCamera extends Fragment {
                 takePicture();
             }
         });
+
 
         return  view;
     }
@@ -157,14 +159,6 @@ public class FragmentCamera extends Fragment {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = size;
         Bitmap resized = Bitmap.createScaledBitmap(srcBmp, width, height, true);
-        return resized;
-    }
-
-    public static Bitmap getResizedBitmap(Resources resources, int id, int size, int width, int height){
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inSampleSize = size;
-        Bitmap src = BitmapFactory.decodeResource(resources, id, options);
-        Bitmap resized = Bitmap.createScaledBitmap(src, width, height, true);
         return resized;
     }
 
