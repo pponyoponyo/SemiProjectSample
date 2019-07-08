@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="회원 정보"
         android:layout_gravity="center"
-        android:textSize="30dp"
+        android:textSize="20dp"
         android:layout_margin="10dp"/>
 
     <ImageView
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="TextView"
-            android:textSize="20dp" />
+            android:textSize="15dp" />
 
         <TextView
             android:id="@+id/txtMemName"
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="TextView"
-            android:textSize="20dp" />
+            android:textSize="15dp" />
 
         <TextView
             android:id="@+id/txtMemPass"
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="TextView"
-            android:textSize="20dp" />
+            android:textSize="15dp" />
 
         <TextView
             android:id="@+id/txtMemDate"
@@ -59,13 +59,27 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="TextView"
-            android:textSize="20dp" />
+            android:textSize="15dp" />
 
-        <Button
-            android:id="@+id/btnLogout"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="logout" />
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="10dp">
+
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="로그아웃" />
+            <Button
+                android:id="@+id/btnDrop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="탈퇴하기" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
