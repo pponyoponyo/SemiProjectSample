@@ -9,6 +9,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.widget.Button;
 
 import com.example.semiprojectsample.R;
 import com.example.semiprojectsample.fragment.FragmentMember;
@@ -19,6 +20,7 @@ public class MainAvtivity extends AppCompatActivity {
 
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,4 +80,6 @@ public class MainAvtivity extends AppCompatActivity {
             return tabSize;
         }
     }
+
+
 }

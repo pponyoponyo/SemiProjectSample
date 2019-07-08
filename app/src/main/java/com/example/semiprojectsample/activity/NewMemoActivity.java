@@ -115,6 +115,7 @@ public class NewMemoActivity extends AppCompatActivity {
         Log.e("SEM1","memoStr : "+memoStr+" photoPath" + photoPath);
         Toast.makeText(this,"memoStr : "+memoStr+" photoPath" + photoPath,Toast.LENGTH_SHORT ).show();
 
+
     }
 
 }

@@ -1,28 +1,35 @@
 package com.example.semiprojectsample.fragment;
 
-import android.media.Image;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.semiprojectsample.R;
+import com.example.semiprojectsample.activity.LoginActivity;
+import com.example.semiprojectsample.activity.MainAvtivity;
 import com.example.semiprojectsample.bean.MemberBean;
 import com.example.semiprojectsample.db.FileDB;
 
-import org.w3c.dom.Text;
-
 import java.io.File;
+
+import static com.example.semiprojectsample.activity.JoinActivity.getResizedBitmap;
 
 
 public class FragmentMember extends Fragment {
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -37,12 +44,21 @@ public class FragmentMember extends Fragment {
 
         MemberBean memberBean = FileDB.getLoginMember(getActivity());
 
-        imgProfile.setImageURI(Uri.fromFile(new File(memberBean.photopath)));
+        Bitmap bitmap = BitmapFactory.decodeFile(memberBean.photopath);
+        Bitmap resizedBmp = getResizedBitmap(bitmap, 4, 100, 100);
+        imgProfile.setImageBitmap(resizedBmp);
         txtMemId.setText(memberBean.memid);
         txtMemPass.setText(memberBean.mempass);
         txtMemName.setText(memberBean.memName);
         txtMemDate.setText(memberBean.memDate);
 
+        view.findViewById(R.id.btnLogout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
+
+            }
+        });
          return view;
     }
 }

@@ -43,19 +43,25 @@ public class LoginActivity extends AppCompatActivity {
     private void checkLogin() {
 
         MemberBean memberBean = FileDB.getFindMember(LoginActivity.this,mEdtID.getText().toString());
+
         if(memberBean == null){
             Toast.makeText(LoginActivity.this,"해당 아이디는 가입이 되어있지 않습니다.",Toast.LENGTH_SHORT).show();
             return;
         }
+
         if(TextUtils.equals(memberBean.mempass,mEdtPass.getText().toString())){
 
             FileDB.setLoginMember(LoginActivity.this,memberBean);
             Intent intent = new Intent(LoginActivity.this, MainAvtivity.class);
             startActivity(intent);
+            mEdtID.setText("");
+            mEdtPass.setText("");
+
         }else{
             Toast.makeText(LoginActivity.this,"패스워드가 일치하지 않습니다.",Toast.LENGTH_SHORT).show();
             return;
         }
+
     }
 
 
