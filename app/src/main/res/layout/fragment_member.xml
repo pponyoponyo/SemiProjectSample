@@ -21,7 +21,7 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginTop="10dp"
-        android:src="@android:color/holo_green_dark"
+        android:src="@drawable/rectangle"
         android:layout_gravity="center"/>
 
     <LinearLayout
@@ -80,6 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="탈퇴하기" />
+
         </LinearLayout>
     </LinearLayout>
 

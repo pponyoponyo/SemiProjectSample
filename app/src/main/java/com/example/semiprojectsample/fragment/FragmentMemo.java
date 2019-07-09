@@ -130,10 +130,12 @@ public class FragmentMemo extends Fragment {
             convertView.findViewById(R.id.btnDel).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    FileDB.delMemo(getActivity(), memo.memoId);
-                    memoList = FileDB.getMemoList(getContext());
-                    adapter.setMemoList(memoList);
-                    adapter.notifyDataSetChanged();
+
+                        FileDB.delMemo(getActivity(), memo.memoId);
+                        memoList = FileDB.getMemoList(getContext());
+                        adapter.setMemoList(memoList);
+                        adapter.notifyDataSetChanged();
+
                 }
             });
 

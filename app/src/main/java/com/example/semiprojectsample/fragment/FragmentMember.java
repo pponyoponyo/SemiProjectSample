@@ -2,6 +2,7 @@ package com.example.semiprojectsample.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.semiprojectsample.R;
+import com.example.semiprojectsample.activity.JoinActivity;
 import com.example.semiprojectsample.bean.MemberBean;
 import com.example.semiprojectsample.db.FileDB;
 
@@ -42,10 +44,10 @@ public class FragmentMember extends Fragment {
         Bitmap bitmap = BitmapFactory.decodeFile(memberBean.photopath);
         Bitmap resizedBmp = getResizedBitmap(bitmap, 4, 100, 100);
         imgProfile.setImageBitmap(resizedBmp);
-        txtMemId.setText(memberBean.memId);
-        txtMemPass.setText(memberBean.mempass);
-        txtMemName.setText(memberBean.memName);
-        txtMemDate.setText(memberBean.memDate);
+        txtMemId.setText("ID : " + memberBean.memId);
+        txtMemPass.setText("Password : " +memberBean.mempass);
+        txtMemName.setText("Name : " +memberBean.memName);
+        txtMemDate.setText("Register Date : " +memberBean.memDate);
 
         view.findViewById(R.id.btnLogout).setOnClickListener(new View.OnClickListener() {
             @Override
