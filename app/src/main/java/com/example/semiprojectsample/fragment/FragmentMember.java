@@ -1,5 +1,7 @@
 package com.example.semiprojectsample.fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,7 +20,7 @@ import com.example.semiprojectsample.R;
 import com.example.semiprojectsample.bean.MemberBean;
 import com.example.semiprojectsample.db.FileDB;
 
-import static com.example.semiprojectsample.activity.JoinActivity.getResizedBitmap;
+
 
 
 public class FragmentMember extends Fragment {
@@ -51,6 +54,47 @@ public class FragmentMember extends Fragment {
 
             }
         });
+
+        view.findViewById(R.id.btnDrop).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                showDialog("정말 탈퇴하시겠습니까?");
+            }
+        });
+
          return view;
+    }
+
+    public void showDialog(String msg){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("탈퇴하기");
+        builder.setMessage(msg);
+
+        builder.setPositiveButton("네", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                MemberBean loginMem = FileDB.getLoginMember(getContext());
+                FileDB.delMember(getContext(),loginMem.memid);
+                Toast.makeText(getActivity(), "탈퇴되었습니다.", Toast.LENGTH_SHORT).show();
+                getActivity().finish();
+            }
+        });
+
+        builder.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        builder.show();
+    }
+
+    public static Bitmap getResizedBitmap(Bitmap srcBmp, int size, int width, int height){
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = size;
+        Bitmap resized = Bitmap.createScaledBitmap(srcBmp, width, height, true);
+        return resized;
     }
 }

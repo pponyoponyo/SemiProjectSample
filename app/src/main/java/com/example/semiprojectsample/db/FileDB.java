@@ -26,7 +26,7 @@ public class FileDB {
     //새로운 멤버 추가
     public static void addMember (Context context, MemberBean memberBean){
         //1. 기존의 멤버 리스트를 불러온다
-    List<MemberBean> memberList = getMemberList(context);
+         List<MemberBean> memberList = getMemberList(context);
 
         //2. 기존의 멤버 리스트에 추가한다.
         memberList.add(memberBean);
@@ -62,6 +62,21 @@ public class FileDB {
         editor.putString("memberList",jsonStr);
         editor.commit();
 
+    }
+
+    public static void delMember(Context context, String memid){
+        List<MemberBean> memberList = getMemberList(context);
+        if(memberList.size() == 0) return;
+
+        MemberBean findMem = getFindMember(context,memid);
+        int index = getMemberIndex(context,findMem.memid);
+        memberList.remove(index);
+
+        String jsonStr = mGson.toJson(memberList);
+
+        SharedPreferences.Editor editor = getsp(context).edit();
+        editor.putString("memberList",jsonStr);
+        editor.commit();
     }
 
     public static void addMemo(Context context, String memid, MemoBean memoBean){
@@ -100,6 +115,7 @@ public class FileDB {
     public static MemberBean getFindMember(Context context , String memId){
         //1. 멤버 리스트를 가져온다.
         List<MemberBean> memberList = getMemberList(context);
+
         //2. for 문 돌면서 해당 아이디를 찾는다.
         for(MemberBean bean : memberList){
             if(TextUtils.equals(bean.memid,memId)){
@@ -112,6 +128,25 @@ public class FileDB {
         return null;
     }
 
+    public static int getMemberIndex (Context context,String memid){
+        //1. 멤버 리스트를 가져온다.
+        List<MemberBean> memberList = getMemberList(context);
+        //2. for 문 돌면서 해당 아이디를 찾는다.
+
+        int index = 0;
+
+
+        for(MemberBean bean : memberList){
+            if(TextUtils.equals(bean.memid,memid)){
+                return index;
+            }
+            index ++;
+        }
+        //3. 찾았을 경우는 해당 memberBean 을 리턴한다.
+        //3-2 못찾았을 경우는? null 리턴
+
+        return -1;
+    }
     //로그인한 MEmberBean 을 저장한다.
     public static void setLoginMember(Context context, MemberBean bean){
         if(bean != null){
