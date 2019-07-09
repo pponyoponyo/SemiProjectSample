@@ -42,7 +42,7 @@ public class FragmentMember extends Fragment {
         Bitmap bitmap = BitmapFactory.decodeFile(memberBean.photopath);
         Bitmap resizedBmp = getResizedBitmap(bitmap, 4, 100, 100);
         imgProfile.setImageBitmap(resizedBmp);
-        txtMemId.setText(memberBean.memid);
+        txtMemId.setText(memberBean.memId);
         txtMemPass.setText(memberBean.mempass);
         txtMemName.setText(memberBean.memName);
         txtMemDate.setText(memberBean.memDate);
@@ -75,8 +75,8 @@ public class FragmentMember extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 MemberBean loginMem = FileDB.getLoginMember(getContext());
-                FileDB.delMember(getContext(),loginMem.memid);
-                Toast.makeText(getActivity(), "탈퇴되었습니다.", Toast.LENGTH_SHORT).show();
+                FileDB.delMember(getContext(), loginMem.memId);
+                Toast.makeText(getActivity(), "탈퇴 되었습니다.", Toast.LENGTH_SHORT).show();
                 getActivity().finish();
             }
         });

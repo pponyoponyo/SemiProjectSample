@@ -12,12 +12,13 @@
         android:id="@+id/imgMemo"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@android:color/holo_blue_dark" />
+        android:src="@drawable/rectangle" />
 
     <Button
         android:id="@+id/btnMemoCamera"
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="picture" />
+        android:text="picture"
+        />
 </LinearLayout>

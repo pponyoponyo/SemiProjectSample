@@ -28,21 +28,30 @@
         android:layout_weight="0.1"
         android:gravity="center"
         android:orientation="horizontal"
-        android:weightSum="1">
+        android:padding="5dp">
 
         <Button
 
+            android:id="@+id/btnCancelM"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="0.5"
+
             android:text="cancel" />
 
         <Button
-
+            android:id="@+id/btnDeleteM"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="0.5"
+
+            android:text="delete" />
+
+        <Button
+            android:id="@+id/btnSaveM"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+
             android:text="save" />
+
     </LinearLayout>
 
 </LinearLayout>

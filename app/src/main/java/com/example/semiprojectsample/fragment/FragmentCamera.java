@@ -2,7 +2,6 @@ package com.example.semiprojectsample.fragment;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -17,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -91,6 +89,7 @@ public class FragmentCamera extends Fragment {
         startActivityForResult(i, REQUEST_IMAGE_CAPTURE);
 
     }
+
     private File getOutPutMediaFile() {
         File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES), "Profile");
@@ -172,5 +171,6 @@ public class FragmentCamera extends Fragment {
             }
         }
     }
+
 
 }

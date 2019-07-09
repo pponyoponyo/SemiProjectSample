@@ -1,6 +1,8 @@
 package com.example.semiprojectsample.fragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,7 +22,6 @@ import androidx.fragment.app.Fragment;
 import com.example.semiprojectsample.R;
 import com.example.semiprojectsample.activity.ModifyMemoActivity;
 import com.example.semiprojectsample.activity.NewMemoActivity;
-import com.example.semiprojectsample.bean.MemberBean;
 import com.example.semiprojectsample.bean.MemoBean;
 import com.example.semiprojectsample.db.FileDB;
 
@@ -29,12 +29,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class FragmentMemo extends Fragment {
 
     private ListView mLstMemo;
     public ListAdapter adapter;
-    public MemberBean loginMem;
     public List<MemoBean> memoList = new ArrayList<>();
     public final static int Saved = 1004;
 
@@ -60,25 +58,11 @@ public class FragmentMemo extends Fragment {
     public void onResume() {
         super.onResume();
 
-        loginMem = FileDB.getLoginMember(getContext());
-        memoList = FileDB.getMemoList(getContext(),loginMem.memid);
-
+        memoList = FileDB.getMemoList(getContext());
         //adapter 생성 및 적용
         adapter = new ListAdapter(memoList,getContext());
         //list view 에 adapter 설정
         mLstMemo.setAdapter(adapter);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == Saved){
-            memoList = FileDB.getMemoList(getContext(),loginMem.memid);
-            adapter.setMemoList(memoList);
-            adapter.notifyDataSetChanged();
-        }
-
     }
 
     class ListAdapter extends BaseAdapter {
@@ -132,10 +116,33 @@ public class FragmentMemo extends Fragment {
             memoDetail.setText(memo.memo);
             memoDate.setText(memo.memoDate);
 
+            //수정
             convertView.findViewById(R.id.btnModify).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(getActivity(),ModifyMemoActivity.class);
+                    intent.putExtra("memoId", memo.memoId);
+                    startActivity(intent);
+                }
+            });
+
+            //삭제
+            convertView.findViewById(R.id.btnDel).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    FileDB.delMemo(getActivity(), memo.memoId);
+                    memoList = FileDB.getMemoList(getContext());
+                    adapter.setMemoList(memoList);
+                    adapter.notifyDataSetChanged();
+                }
+            });
+
+            //상세
+            convertView.findViewById(R.id.btnDetail).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getActivity(),ModifyMemoActivity.class);
+                    intent.putExtra("memoId", memo.memoId);
                     startActivity(intent);
                 }
             });
@@ -149,5 +156,6 @@ public class FragmentMemo extends Fragment {
         Bitmap resized = Bitmap.createScaledBitmap(srcBmp, width, height, true);
         return resized;
     }
+
 
 }

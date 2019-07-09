@@ -79,6 +79,7 @@ public class NewMemoActivity extends AppCompatActivity {
 
         }
     };
+
     class ViewPagerAdapter extends FragmentPagerAdapter {
 
         private int tabSize;
@@ -128,19 +129,17 @@ public class NewMemoActivity extends AppCompatActivity {
             return;
         }
 
+        MemberBean loginMember = FileDB.getLoginMember(this);
         memoBean.memo = memoStr;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         memoBean.memoDate = sdf.format(new Date());
         memoBean.memoPicPath = photoPath;
 
-        MemberBean loginMember = FileDB.getLoginMember(this);
-
-        FileDB.addMemo(this, loginMember.memid,memoBean);
+        FileDB.addMemo(this, loginMember.memId,memoBean);
 
         Toast.makeText(this,"메모가 추가되었습니다.",Toast.LENGTH_SHORT).show();
 
         finish();
-
     }
 
 }

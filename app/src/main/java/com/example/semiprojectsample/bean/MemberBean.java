@@ -5,7 +5,7 @@ import java.util.List;
 public class MemberBean {
 
     public String photopath;
-    public String memid;
+    public String memId;
     public String mempass;
     public String memName;
     public String memDate;

@@ -5,13 +5,15 @@
     android:layout_height="match_parent"
     tools:context=".fragment.FragmentMemo">
 
+
     <EditText
         android:id="@+id/edtwriteMemo"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:gravity="start|top"
         android:hint="메모를 입력하세요"
-        android:lines="10"
-        android:singleLine="false"
-        />
+        android:inputType="textMultiLine" />
 
 </LinearLayout>

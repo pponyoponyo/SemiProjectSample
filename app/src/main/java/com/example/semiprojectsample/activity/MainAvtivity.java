@@ -1,15 +1,12 @@
 package com.example.semiprojectsample.activity;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
-import android.os.Bundle;
-import android.view.View;
-import android.view.ViewAnimationUtils;
-import android.widget.Button;
 
 import com.example.semiprojectsample.R;
 import com.example.semiprojectsample.fragment.FragmentMember;
@@ -20,7 +17,6 @@ public class MainAvtivity extends AppCompatActivity {
 
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

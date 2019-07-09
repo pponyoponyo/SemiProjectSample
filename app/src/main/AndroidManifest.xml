@@ -21,7 +21,6 @@
                 android:resource="@xml/file_paths"/>
         </provider>
         <activity android:name=".activity.ModifyMemoActivity"></activity>
-
         <activity android:name=".activity.NewMemoActivity"></activity>
         <activity android:name=".activity.MainAvtivity" />
         <activity android:name=".activity.JoinActivity" />

@@ -57,7 +57,6 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
             mEdtID.setText("");
             mEdtPass.setText("");
-
         }else{
             Toast.makeText(LoginActivity.this,"패스워드가 일치하지 않습니다.",Toast.LENGTH_SHORT).show();
             return;
@@ -69,7 +68,6 @@ public class LoginActivity extends AppCompatActivity {
     private View.OnClickListener mBtnJoinClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-
             Intent intent = new Intent(LoginActivity.this,JoinActivity.class);
             startActivity(intent);
         }

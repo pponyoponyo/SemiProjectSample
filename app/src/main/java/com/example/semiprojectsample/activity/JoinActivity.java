@@ -3,7 +3,6 @@ package com.example.semiprojectsample.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -85,14 +84,14 @@ public class JoinActivity extends AppCompatActivity {
     private void joinProcess() {
 
         MemberBean memberBean = new MemberBean();
-        memberBean.memid = mEdtId.getText().toString();
+        memberBean.memId = mEdtId.getText().toString();
         memberBean.memName = mEdtName.getText().toString();
         memberBean.photopath = mPhotoPath;
 
         String pw1 = mEdtPass.getText().toString();
         String pw2 = mEdtPassA.getText().toString();
 
-        if(TextUtils.isEmpty(memberBean.memid)){
+        if(TextUtils.isEmpty(memberBean.memId)){
             Toast.makeText(this,"회원 아이디를 입력하세요",Toast.LENGTH_SHORT).show();
             return;
         }
@@ -101,7 +100,7 @@ public class JoinActivity extends AppCompatActivity {
             return;
         }
 
-        MemberBean findMemBean = FileDB.getFindMember(this, memberBean.memid);
+        MemberBean findMemBean = FileDB.getFindMember(this, memberBean.memId);
 
         if(findMemBean != null){
             Toast.makeText(this,"입력하신 아이디는 이미 존재합니다.",Toast.LENGTH_SHORT).show();
@@ -213,13 +212,6 @@ public class JoinActivity extends AppCompatActivity {
         return resized;
     }
 
-    public static Bitmap getResizedBitmap(Resources resources, int id, int size, int width, int height){
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inSampleSize = size;
-        Bitmap src = BitmapFactory.decodeResource(resources, id, options);
-        Bitmap resized = Bitmap.createScaledBitmap(src, width, height, true);
-        return resized;
-    }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
